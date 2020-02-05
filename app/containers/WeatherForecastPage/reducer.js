@@ -16,10 +16,11 @@ export const initialState = {
   weatherData: {},
   dailyData: [],
   hourlyData: [],
-  forecastDays: [],
   isLoading: false,
   error: null,
 };
+
+let filteredDaily = [];
 
 /* eslint-disable default-case, no-param-reassign */
 const weatherForecastPageReducer = (state = initialState, action) =>
@@ -42,10 +43,10 @@ const weatherForecastPageReducer = (state = initialState, action) =>
 
       case FILTER_DAILY_FORECAST_DATA:
         // put logic here
-        const gagi = action.data.list.filter(reading =>
+        filteredDaily = action.data.list.filter(reading =>
           reading.dt_txt.includes('00:00:00'),
         );
-        draft.dailyData = gagi;
+        draft.dailyData = filteredDaily;
         break;
 
       case FILTER_HOURLY_FORECAST_DATA:

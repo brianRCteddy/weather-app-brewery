@@ -20,6 +20,8 @@ import saga from './saga';
 import messages from './messages';
 import { filterDaily } from './actions';
 
+import DailyForecast from '../../components/DailyForecast';
+
 export function WeatherForecastPage(props) {
   useInjectReducer({ key: 'weatherForecastPage', reducer });
   useInjectSaga({ key: 'weatherForecastPage', saga });
@@ -34,12 +36,16 @@ export function WeatherForecastPage(props) {
         <meta name="description" content="Description of WeatherForecastPage" />
       </Helmet>
       {console.log(props)}
-      <FormattedMessage {...messages.header} />
+      {props.weatherForecastPage.dailyData.map((day, index) => (
+        <DailyForecast key={day.dt} index={index} data={day} />
+      ))}
     </div>
   );
 }
 
-WeatherForecastPage.propTypes = {};
+WeatherForecastPage.propTypes = {
+  weatherForecastPage: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = createStructuredSelector({
   weatherForecastPage: makeSelectWeatherForecastPage(),
