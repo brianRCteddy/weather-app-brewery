@@ -19,11 +19,11 @@ export function filterDaily(data) {
   };
 }
 
-export function filterHourly(index, hourlyData) {
+export function filterHourly(index, data) {
   return {
     type: FILTER_HOURLY_FORECAST_DATA,
     index,
-    hourlyData,
+    data,
   };
 }
 

@@ -1,6 +1,6 @@
 /**
  *
- * HourlyForecast
+ * HourlyForecastCard
  *
  */
 
@@ -11,8 +11,7 @@ import React, { memo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-function HourlyForecast(props) {
-  console.log(props);
+function HourlyForecastCard() {
   return (
     <div>
       <FormattedMessage {...messages.header} />
@@ -20,8 +19,6 @@ function HourlyForecast(props) {
   );
 }
 
-HourlyForecast.propTypes = {};
+HourlyForecastCard.propTypes = {};
 
-const mapStateToProps = '';
-
-export default memo(HourlyForecast);
+export default memo(HourlyForecastCard);

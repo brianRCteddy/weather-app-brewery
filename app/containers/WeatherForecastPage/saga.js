@@ -1,6 +1,12 @@
 import { take, call, put, select } from 'redux-saga/effects';
 
-import { successFetch, errorFetch, initFetch, filterDaily } from './actions';
+import {
+  successFetch,
+  errorFetch,
+  initFetch,
+  filterDaily,
+  filterHourly,
+} from './actions';
 
 // Individual exports for testing
 export default function* weatherForecastPageSaga() {
