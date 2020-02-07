@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -16,10 +16,10 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectWeatherForecastPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { filterDaily, filterHourly } from './actions';
+import { filterDaily } from './actions';
 
 import DailyForecast from '../../components/DailyForecast';
-import FullDataForecast from '../../components/FullDataForecast';
+import HourlyForecast from '../../components/HourlyForecast';
 
 export function WeatherForecastPage(props) {
   useInjectReducer({ key: 'weatherForecastPage', reducer });
@@ -33,12 +33,6 @@ export function WeatherForecastPage(props) {
       </Helmet>
       <h1>5 Day Weather Forecast</h1>
 
-      <button
-        onClick={() => props.filterDaily(props.weatherForecastPage.dataList)}
-        type="button"
-      >
-        Filter Daily
-      </button>
       <br />
       <br />
 
@@ -51,7 +45,6 @@ export function WeatherForecastPage(props) {
 
 WeatherForecastPage.propTypes = {
   weatherForecastPage: PropTypes.object.isRequired,
-  filterDaily: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

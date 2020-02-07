@@ -10,6 +10,7 @@ import {
   ERROR_FETCH_FORECAST_DATA,
   FILTER_DAILY_FORECAST_DATA,
   FILTER_HOURLY_FORECAST_DATA,
+  CHANGE_INDEX,
 } from './constants';
 
 let filteredDaily = [];
@@ -20,8 +21,6 @@ const addDays = (dateNow, numOfDays) => {
   date.setDate(date.getDate() + numOfDays);
   return date;
 };
-
-const firstDay = addDays(dateToday, 1);
 
 const appendZero = n => {
   if (n <= 9) {
@@ -37,8 +36,6 @@ const transformDate = fullDate => {
   )}-${appendZero(fullDate.getDate())}`;
   return formattedDate;
 };
-
-let string1 = '2020-02-10';
 
 const day1 = addDays(dateToday, 1);
 const day2 = addDays(dateToday, 2);
@@ -56,6 +53,7 @@ export const initialState = {
   weatherData: {},
   dataList: [],
   dailyData: [],
+  index: null,
   hourlyData: {
     0: [],
     1: [],
@@ -113,6 +111,9 @@ const weatherForecastPageReducer = (state = initialState, action) =>
           reading.dt_txt.includes(transformDay5),
         );
         break;
+
+      case CHANGE_INDEX:
+        draft.index = action.index;
     }
   });
 

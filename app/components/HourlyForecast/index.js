@@ -6,45 +6,52 @@
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 // import styled from 'styled-components';
 
 import { FormattedDate } from 'react-intl';
-import messages from './messages';
+
+import makeSelectWeatherForecastPage from '../../containers/WeatherForecastPage/selectors';
 
 function HourlyForecast(props) {
-  const newDate = new Date(props.hour.dt_txt);
-  const getDayName = newDate.toString().split(' ');
-  const linkUrl = getDayName[0];
-
-  const celsiusMin = props.hour.main.temp_min - 273.15;
-  const celsiusMax = props.hour.main.temp_max - 273.15;
-  console.log(props);
-  return (
-    <div>
-      <FormattedDate
-        value={new Date(props.hour.dt * 1000)}
-        hour="numeric"
-        timeZoneName="short"
-      />
-      <div>
+  console.log(props.weatherForecastPage);
+  const day1 = props.weatherForecastPage.hourlyData[0].map(data => {
+    const celsiusMin = data.main.temp_min - 273.15;
+    const celsiusMax = data.main.temp_max - 273.15;
+    return (
+      <div key={data.dt}>
+        <FormattedDate
+          value={new Date(data.dt * 1000)}
+          hour="numeric"
+          timeZoneName="short"
+        />
         <span>Highest temp: {celsiusMax.toFixed(2)}&deg; </span>
         <span>Lowest temp: {celsiusMin.toFixed(2)}&deg;</span>
-      </div>
-      <div>
         <img
-          src={`https://openweathermap.org/img/w/${
-            props.hour.weather[0].icon
-          }.png`}
-          alt={props.hour.weather[0].description}
+          src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+          alt={data.weather[0].description}
         />
-        {props.hour.weather[0].main}
+        {data.weather[0].main}
       </div>
-    </div>
-  );
+    );
+  });
+
+  return <div>{day1}</div>;
 }
 
+const mapStateToProps = createStructuredSelector({
+  weatherForecastPage: makeSelectWeatherForecastPage(),
+});
+
+const withConnect = connect(mapStateToProps);
+
 HourlyForecast.propTypes = {
-  hour: PropTypes.object.isRequired,
+  weatherForecastPage: PropTypes.object.isRequired,
 };
 
-export default memo(HourlyForecast);
+export default compose(
+  withConnect,
+  memo,
+)(HourlyForecast);

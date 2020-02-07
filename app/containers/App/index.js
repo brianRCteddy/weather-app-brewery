@@ -15,7 +15,6 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GlobalStyle from '../../global-styles';
 import WeatherForecastPage from '../WeatherForecastPage';
 import HourlyForecast from '../../components/HourlyForecast';
-import DailyForecast from '../../components/DailyForecast';
 
 export default function App() {
   return (

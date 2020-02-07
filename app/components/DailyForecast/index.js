@@ -13,9 +13,8 @@ import { createStructuredSelector } from 'reselect';
 // import styled from 'styled-components';
 
 import { FormattedDate } from 'react-intl';
-import { filterHourly } from '../../containers/WeatherForecastPage/actions';
+import { changeIndex } from '../../containers/WeatherForecastPage/actions';
 import makeSelectWeatherForecastPage from '../../containers/WeatherForecastPage/selectors';
-import HourlyForecast from '../HourlyForecast';
 
 function DailyForecast(props) {
   const newDate = new Date(props.day.dt_txt);
@@ -27,18 +26,16 @@ function DailyForecast(props) {
 
   return (
     <div>
-      {/* <Link to={`/${linkUrl}`} style={{ color: 'black' }}> */}
-      {/* <div
-          onClick={() => props.filterHourly(props.weatherForecastPage.dataList)}
-        /> */}
-      <FormattedDate
-        value={new Date(props.day.dt * 1000)}
-        weekday="short"
-        hour="numeric"
-        timeZoneName="short"
-      />
-      <br />
-      {/* </Link> */}
+      <Link to={`/${linkUrl}`} style={{ color: 'black' }}>
+        <FormattedDate
+          value={new Date(props.day.dt * 1000)}
+          weekday="short"
+          hour="numeric"
+          timeZoneName="short"
+        />
+        <br />
+      </Link>
+
       <div>
         <span>Highest temp: {celsiusMax.toFixed(2)}&deg; </span>
         <span>Lowest temp: {celsiusMin.toFixed(2)}&deg;</span>
@@ -51,25 +48,13 @@ function DailyForecast(props) {
           alt={props.day.weather[0].description}
         />
         {props.day.weather[0].main}
-        <button
-          onClick={() =>
-            props.filterHourly(props.weatherForecastPage.dataList, props.index)
-          }
-          type="button"
-        >
-          Filter Hourly
-        </button>
       </div>
-      {props.weatherForecastPage.hourlyData[props.index].map(hour => (
-        <HourlyForecast key={hour.dt} hour={hour} />
-      ))}
     </div>
   );
 }
 
 DailyForecast.propTypes = {
   day: PropTypes.object.isRequired,
-  filterHourly: PropTypes.func.isRequired,
   weatherForecastPage: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 };
@@ -79,7 +64,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  filterHourly: data => dispatch(filterHourly(data)),
+  changeIndex: index => dispatch(changeIndex(index)),
 });
 
 const withConnect = connect(
