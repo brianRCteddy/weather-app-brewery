@@ -23,10 +23,14 @@ function DailyForecast(props) {
 
   const celsiusMin = props.day.main.temp_min - 273.15;
   const celsiusMax = props.day.main.temp_max - 273.15;
-
+  console.log('DailyComponent', props.index);
   return (
     <div>
-      <Link to={`/${linkUrl}`} style={{ color: 'black' }}>
+      <Link
+        to={`/${linkUrl}`}
+        style={{ color: 'black' }}
+        onClick={() => props.changeIndex(props.index)}
+      >
         <FormattedDate
           value={new Date(props.day.dt * 1000)}
           weekday="short"
