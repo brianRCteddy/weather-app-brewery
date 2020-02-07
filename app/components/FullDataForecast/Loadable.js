@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for HourlyForecastCard
+ * Asynchronously loads the component for FullDataForecast
  *
  */
 

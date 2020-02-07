@@ -19,7 +19,6 @@ export default function* weatherForecastPageSaga() {
     const response = yield fetch(url);
     const data = yield response.json();
     yield put(successFetch(data));
-    yield put(filterDaily(data));
   } catch (error) {
     yield put(errorFetch());
   }

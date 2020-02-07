@@ -1,6 +1,6 @@
 /**
  *
- * Tests for HourlyForecastCard
+ * Tests for FullDataForecast
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -11,15 +11,15 @@ import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import HourlyForecastCard from '../index';
+import FullDataForecast from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
-describe('<HourlyForecastCard />', () => {
+describe('<FullDataForecast />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <HourlyForecastCard />
+        <FullDataForecast />
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -39,7 +39,7 @@ describe('<HourlyForecastCard />', () => {
       container: { firstChild },
     } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <HourlyForecastCard />
+        <FullDataForecast />
       </IntlProvider>,
     );
     expect(firstChild).toMatchSnapshot();
