@@ -16,12 +16,14 @@ import {
 let filteredDaily = [];
 const dateToday = new Date();
 
+// logic for adding days to the current day for the next days forecast
 const addDays = (dateNow, numOfDays) => {
   const date = new Date(dateNow);
   date.setDate(date.getDate() + numOfDays);
   return date;
 };
 
+// logic to append to leading zeroes on date
 const appendZero = n => {
   if (n <= 9) {
     return `0${n}`;
@@ -29,7 +31,7 @@ const appendZero = n => {
   return n;
 };
 
-// put the function of transformDate to addDays
+// logic to transform the data from full newDate to "YYYY-MM-DD" ex. "2020-02-22"
 const transformDate = fullDate => {
   const formattedDate = `${fullDate.getFullYear()}-${appendZero(
     fullDate.getMonth() + 1,
@@ -114,6 +116,7 @@ const weatherForecastPageReducer = (state = initialState, action) =>
 
       case CHANGE_INDEX:
         draft.index = action.index;
+        break;
     }
   });
 

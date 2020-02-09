@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -17,13 +17,14 @@ import { changeIndex } from '../../containers/WeatherForecastPage/actions';
 import makeSelectWeatherForecastPage from '../../containers/WeatherForecastPage/selectors';
 
 function DailyForecast(props) {
+  // logic for transfoming the params
   const newDate = new Date(props.day.dt_txt);
   const getDayName = newDate.toString().split(' ');
   const linkUrl = getDayName[0];
 
   const celsiusMin = props.day.main.temp_min - 273.15;
   const celsiusMax = props.day.main.temp_max - 273.15;
-  console.log('DailyComponent', props.index);
+
   return (
     <div>
       <Link
@@ -59,8 +60,8 @@ function DailyForecast(props) {
 
 DailyForecast.propTypes = {
   day: PropTypes.object.isRequired,
-  weatherForecastPage: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
+  changeIndex: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

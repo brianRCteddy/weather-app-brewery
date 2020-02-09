@@ -19,7 +19,6 @@ import saga from './saga';
 import { filterDaily } from './actions';
 
 import DailyForecast from '../../components/DailyForecast';
-import HourlyForecast from '../../components/HourlyForecast';
 
 export function WeatherForecastPage(props) {
   useInjectReducer({ key: 'weatherForecastPage', reducer });

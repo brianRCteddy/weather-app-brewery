@@ -16,8 +16,7 @@ import { FormattedDate } from 'react-intl';
 import makeSelectWeatherForecastPage from '../../containers/WeatherForecastPage/selectors';
 
 function HourlyForecast(props) {
-  console.log('Hourly Component', props.weatherForecastPage);
-  const day1 = props.weatherForecastPage.hourlyData[
+  const dayData = props.weatherForecastPage.hourlyData[
     props.weatherForecastPage.index
   ].map(data => {
     const celsiusMin = data.main.temp_min - 273.15;
@@ -40,7 +39,7 @@ function HourlyForecast(props) {
     );
   });
 
-  return <div>{day1}</div>;
+  return <div>{dayData}</div>;
 }
 
 const mapStateToProps = createStructuredSelector({
