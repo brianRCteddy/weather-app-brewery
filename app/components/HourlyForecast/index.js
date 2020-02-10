@@ -39,7 +39,15 @@ function HourlyForecast(props) {
     );
   });
 
-  return <div>{dayData}</div>;
+  return (
+    <div>
+      <FormattedDate
+        value={new Date(props.weatherForecastPage.hourlyData.dt * 1000)}
+        weekday="short"
+      />
+      {dayData}
+    </div>
+  );
 }
 
 const mapStateToProps = createStructuredSelector({
