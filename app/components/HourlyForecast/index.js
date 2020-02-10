@@ -24,7 +24,8 @@ function HourlyForecast(props) {
     return (
       <div key={data.dt}>
         <FormattedDate
-          value={new Date(data.dt * 1000)}
+          value={new Date(data.dt_txt)}
+          weekday="short"
           hour="numeric"
           timeZoneName="short"
         />
@@ -39,15 +40,7 @@ function HourlyForecast(props) {
     );
   });
 
-  return (
-    <div>
-      <FormattedDate
-        value={new Date(props.weatherForecastPage.hourlyData.dt * 1000)}
-        weekday="short"
-      />
-      {dayData}
-    </div>
-  );
+  return <div>{dayData}</div>;
 }
 
 const mapStateToProps = createStructuredSelector({
