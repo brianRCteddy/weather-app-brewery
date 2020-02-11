@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { FormattedDate } from 'react-intl';
 
-import makeSelectWeatherForecastPage from '../../containers/WeatherForecastPage/selectors';
+import { makeSelectWeatherForecastPage } from '../../containers/WeatherForecastPage/selectors';
 
 function HourlyForecast(props) {
   const dayData = props.weatherForecastPage.hourlyData[

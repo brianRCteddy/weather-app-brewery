@@ -16,3 +16,5 @@ export const FILTER_DAILY_FORECAST_DATA =
 export const FILTER_HOURLY_FORECAST_DATA =
   'app/WeatherForecastPage/FILTER_HOURLY_FORECAST_DATA';
 export const CHANGE_INDEX = 'app/WeatherForecastPage/CHANGE_INDEX';
+
+export const SET_CITY = 'app/WeatherForecastPage/SET_CITY';

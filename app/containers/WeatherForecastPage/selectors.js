@@ -10,7 +10,7 @@ const selectWeatherForecastPageDomain = state =>
 
 /**
  * Other specific selectors
- */
+
 
 /**
  * Default selector used by WeatherForecastPage
@@ -22,5 +22,11 @@ const makeSelectWeatherForecastPage = () =>
     substate => substate,
   );
 
-export default makeSelectWeatherForecastPage;
+const makeSelectCity = () =>
+  createSelector(
+    selectWeatherForecastPageDomain,
+    substate => substate.city,
+  );
+
+export { makeSelectWeatherForecastPage, makeSelectCity };
 export { selectWeatherForecastPageDomain };

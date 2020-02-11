@@ -13,16 +13,20 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectWeatherForecastPage from './selectors';
+import { makeSelectWeatherForecastPage, makeSelectCity } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { filterDaily } from './actions';
 
 import DailyForecast from '../../components/DailyForecast';
+import Search from '../../components/Search';
 
 export function WeatherForecastPage(props) {
   useInjectReducer({ key: 'weatherForecastPage', reducer });
   useInjectSaga({ key: 'weatherForecastPage', saga });
+
+  // const city = props.weatherForecastPage.weatherData.city.name;
+  console.log(props);
 
   return (
     <div>
@@ -31,23 +35,36 @@ export function WeatherForecastPage(props) {
         <meta name="description" content="Description of WeatherForecastPage" />
       </Helmet>
       <h1>5 Day Weather Forecast</h1>
-
-      <br />
-      <br />
-
-      {props.weatherForecastPage.dailyData.map((day, index) => (
-        <DailyForecast key={day.dt} index={index} day={day} />
-      ))}
+      {props.weatherForecastPage.isLoading ? (
+        <div>
+          <h1>Loading . . .</h1>
+          <Search />
+        </div>
+      ) : (
+        <div>
+          <Search />
+          <br />
+          <br />
+          <div>
+            <h2>{props.city}</h2>
+            {props.weatherForecastPage.dailyData.map((day, index) => (
+              <DailyForecast key={day.dt} index={index} day={day} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 WeatherForecastPage.propTypes = {
   weatherForecastPage: PropTypes.object.isRequired,
+  city: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   weatherForecastPage: makeSelectWeatherForecastPage(),
+  city: makeSelectCity(),
 });
 
 const mapDispatchToProps = dispatch => ({

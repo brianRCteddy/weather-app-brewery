@@ -11,7 +11,15 @@ import {
   SUCCESS_FETCH_FORECAST_DATA,
   ERROR_FETCH_FORECAST_DATA,
   CHANGE_INDEX,
+  SET_CITY,
 } from './constants';
+
+export function setCityLocation(city) {
+  return {
+    type: SET_CITY,
+    city,
+  };
+}
 
 export function filterDaily(data) {
   return {
@@ -34,10 +42,11 @@ export function changeIndex(index) {
   };
 }
 
-export function successFetch(data) {
+export function successFetch(data, city) {
   return {
     type: SUCCESS_FETCH_FORECAST_DATA,
     data,
+    city,
   };
 }
 

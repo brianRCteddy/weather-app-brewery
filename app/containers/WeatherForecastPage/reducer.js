@@ -11,6 +11,7 @@ import {
   FILTER_DAILY_FORECAST_DATA,
   FILTER_HOURLY_FORECAST_DATA,
   CHANGE_INDEX,
+  SET_CITY,
 } from './constants';
 
 let filteredDaily = [];
@@ -52,6 +53,7 @@ const transformDay4 = transformDate(day4);
 const transformDay5 = transformDate(day5);
 
 export const initialState = {
+  city: '',
   weatherData: {},
   dataList: [],
   dailyData: [],
@@ -71,6 +73,9 @@ export const initialState = {
 const weatherForecastPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case SET_CITY:
+        draft.city = action.city;
+        break;
       case INIT_FETCH_FORECAST_DATA:
         draft.isLoading = true;
         break;
@@ -78,6 +83,7 @@ const weatherForecastPageReducer = (state = initialState, action) =>
       case SUCCESS_FETCH_FORECAST_DATA:
         draft.weatherData = action.data;
         draft.dataList = action.data.list;
+        draft.city = action.city;
         draft.isLoading = false;
         draft.error = false;
         break;

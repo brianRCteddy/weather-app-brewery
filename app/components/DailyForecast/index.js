@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { FormattedDate } from 'react-intl';
 import { changeIndex } from '../../containers/WeatherForecastPage/actions';
-import makeSelectWeatherForecastPage from '../../containers/WeatherForecastPage/selectors';
+import { makeSelectWeatherForecastPage } from '../../containers/WeatherForecastPage/selectors';
 
 function DailyForecast(props) {
   // logic for transfoming the params
