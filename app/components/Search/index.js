@@ -20,7 +20,12 @@ import { makeSelectCity } from '../../containers/WeatherForecastPage/selectors';
 function Search(props) {
   return (
     <div>
-      <input type="text" value={props.city} onChange={props.setCityHandler} />
+      <input
+        type="text"
+        value={props.city}
+        onChange={props.setCityHandler}
+        placeholder="Enter City Here. Ex. London"
+      />
       <button type="button" onClick={() => props.onInitFetch()}>
         Get Weather Data
       </button>
