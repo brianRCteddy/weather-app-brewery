@@ -20,13 +20,11 @@ import { filterDaily } from './actions';
 
 import DailyForecast from '../../components/DailyForecast';
 import Search from '../../components/Search';
+import Loading from '../../components/Loading';
 
 export function WeatherForecastPage(props) {
   useInjectReducer({ key: 'weatherForecastPage', reducer });
   useInjectSaga({ key: 'weatherForecastPage', saga });
-
-  // const city = props.weatherForecastPage.weatherData.city.name;
-  console.log(props);
 
   return (
     <div>
@@ -37,8 +35,7 @@ export function WeatherForecastPage(props) {
       <h1>5 Day Weather Forecast</h1>
       {props.weatherForecastPage.isLoading ? (
         <div>
-          <h1>Loading . . .</h1>
-          <Search />
+          <Loading />
         </div>
       ) : (
         <div>
@@ -46,7 +43,6 @@ export function WeatherForecastPage(props) {
           <br />
           <br />
           <div>
-            <h2>{props.city}</h2>
             {props.weatherForecastPage.dailyData.map((day, index) => (
               <DailyForecast key={day.dt} index={index} day={day} />
             ))}
@@ -59,7 +55,6 @@ export function WeatherForecastPage(props) {
 
 WeatherForecastPage.propTypes = {
   weatherForecastPage: PropTypes.object.isRequired,
-  city: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

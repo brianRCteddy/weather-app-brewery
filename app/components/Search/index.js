@@ -18,7 +18,6 @@ import {
 import { makeSelectCity } from '../../containers/WeatherForecastPage/selectors';
 
 function Search(props) {
-  console.log(props.city);
   return (
     <div>
       <input type="text" value={props.city} onChange={props.setCityHandler} />

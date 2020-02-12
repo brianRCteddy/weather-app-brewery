@@ -3,13 +3,7 @@ import { put, select, takeLatest, call } from 'redux-saga/effects';
 
 import { OPEN_WEATHER_BASE, OPEN_WEATHER_API_KEY } from '../../config';
 
-import {
-  successFetch,
-  errorFetch,
-  filterDaily,
-  filterHourly,
-  initFetch,
-} from './actions';
+import { successFetch, errorFetch, filterDaily, filterHourly } from './actions';
 import { makeSelectCity } from './selectors';
 import { INIT_FETCH_FORECAST_DATA } from './constants';
 import request from '../../utils/request';

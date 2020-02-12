@@ -13,7 +13,10 @@ import { createStructuredSelector } from 'reselect';
 
 import { FormattedDate } from 'react-intl';
 
-import { makeSelectWeatherForecastPage } from '../../containers/WeatherForecastPage/selectors';
+import {
+  makeSelectWeatherForecastPage,
+  makeSelectCity,
+} from '../../containers/WeatherForecastPage/selectors';
 
 function HourlyForecast(props) {
   const dayData = props.weatherForecastPage.hourlyData[
@@ -40,18 +43,25 @@ function HourlyForecast(props) {
     );
   });
 
-  return <div>{dayData}</div>;
+  return (
+    <div>
+      <h1>{props.city}</h1>
+      {dayData}
+    </div>
+  );
 }
-
-const mapStateToProps = createStructuredSelector({
-  weatherForecastPage: makeSelectWeatherForecastPage(),
-});
-
-const withConnect = connect(mapStateToProps);
 
 HourlyForecast.propTypes = {
   weatherForecastPage: PropTypes.object.isRequired,
+  city: PropTypes.string,
 };
+
+const mapStateToProps = createStructuredSelector({
+  weatherForecastPage: makeSelectWeatherForecastPage(),
+  city: makeSelectCity(),
+});
+
+const withConnect = connect(mapStateToProps);
 
 export default compose(
   withConnect,
