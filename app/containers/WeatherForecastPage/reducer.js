@@ -40,18 +40,6 @@ const transformDate = fullDate => {
   return formattedDate;
 };
 
-const day1 = addDays(dateToday, 1);
-const day2 = addDays(dateToday, 2);
-const day3 = addDays(dateToday, 3);
-const day4 = addDays(dateToday, 4);
-const day5 = addDays(dateToday, 5);
-
-const transformDay1 = transformDate(day1);
-const transformDay2 = transformDate(day2);
-const transformDay3 = transformDate(day3);
-const transformDay4 = transformDate(day4);
-const transformDay5 = transformDate(day5);
-
 export const initialState = {
   city: '',
   weatherData: {},
@@ -103,21 +91,12 @@ const weatherForecastPageReducer = (state = initialState, action) =>
 
       case FILTER_HOURLY_FORECAST_DATA:
         // put logic here
-        draft.hourlyData[0] = action.data.filter(reading =>
-          reading.dt_txt.includes(transformDay1),
+        draft.hourlyData[action.index] = action.data.filter(reading =>
+          reading.dt_txt.includes(
+            transformDate(addDays(dateToday, action.index + 1)),
+          ),
         );
-        draft.hourlyData[1] = action.data.filter(reading =>
-          reading.dt_txt.includes(transformDay2),
-        );
-        draft.hourlyData[2] = action.data.filter(reading =>
-          reading.dt_txt.includes(transformDay3),
-        );
-        draft.hourlyData[3] = action.data.filter(reading =>
-          reading.dt_txt.includes(transformDay4),
-        );
-        draft.hourlyData[4] = action.data.filter(reading =>
-          reading.dt_txt.includes(transformDay5),
-        );
+
         break;
 
       case CHANGE_INDEX:
