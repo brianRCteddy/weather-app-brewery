@@ -52,7 +52,7 @@ export default function configureStore(initialState = {}, history) {
   store.injectedSagas = {}; // Saga registry
   store.subscribe(
     throttle(() => {
-      saveState(store.getState());
+      saveState({ weatherForecastPage: store.getState().weatherForecastPage });
     }, 1000),
   );
 
